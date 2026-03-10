@@ -1,41 +1,77 @@
-function cambiarTexto() {
-
-    document.getElementByID("descripcion").innerHTML = "Ahora estás viendo nuestras ofertas!"
-
-}
-
-function modoOscuro() {
-
-    document.body.style.backgroundColor = "black"
-    document.body.style.color = "white"
-
-
-
-}
-
-function modoClaro() {
-
-    document.body.style.backgroundColor = "white"
-    document.body.style.color = "black"
-}
 let carrito = 0
 
-function agregarCarrito() {
+function cambiarTexto(){
+document.getElementById("descripcion").innerHTML =
+"Ahora estás viendo nuestras ofertas"
+}
 
-    carrito++
-    console.log("Productos en carrito: " + carrito)
+function agregarCarrito(){
+
+carrito++
+
+document.getElementById("contenidoModal").innerHTML =
+"Productos agregados: " + carrito
+
+let modal = new bootstrap.Modal(document.getElementById('modalInfo'))
+modal.show()
 
 }
 
-function enviarFormulario() {
+function cambiarModo(){
 
-    let nombre = document.getElementById("nombre").value
-    let correo = document.getElementById("correo").value
+let body = document.body
+let btn = document.getElementById("modoBtn")
 
-    if (nombre == "") {
-        alert("El nombre es obligatorio")
-    }
+body.classList.toggle("modoOscuro")
 
-    console.log("Formulario enviado")
+if(btn.innerText == "Modo oscuro"){
+btn.innerText = "Modo claro"
+}
+else{
+btn.innerText = "Modo oscuro"
+}
+
+}
+
+function enviarFormulario(){
+
+let nombre = document.getElementById("nombre").value
+let apellido = document.getElementById("apellido").value
+let edad = document.getElementById("edad").value
+let telefono = document.getElementById("telefono").value
+let correo = document.getElementById("correo").value
+
+let regexNombre = /^[a-zA-Z ]+$/
+let regexCorreo = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+let regexTelefono = /^[0-9]{7,10}$/
+
+if(!regexNombre.test(nombre)){
+alert("Nombre inválido")
+return false
+}
+
+if(!regexCorreo.test(correo)){
+alert("Correo inválido")
+return false
+}
+
+if(!regexTelefono.test(telefono)){
+alert("Teléfono inválido")
+return false
+}
+
+document.getElementById("contenidoModal").innerHTML =
+`
+Nombre: ${nombre}<br>
+Apellido: ${apellido}<br>
+Edad: ${edad}<br>
+Telefono: ${telefono}<br>
+Correo: ${correo}
+`
+
+let modal = new bootstrap.Modal(document.getElementById('modalInfo'))
+modal.show()
+
+return false
 
 }

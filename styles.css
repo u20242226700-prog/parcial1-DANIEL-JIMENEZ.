@@ -1,12 +1,20 @@
-body {
-    font-family: Arial
+body{
+font-family: Arial, sans-serif;
 }
 
-h1 {
-    color: #333
+h1{
+color:#333;
 }
 
-.producto {
-    border: 1px solid #ddd;
-    padding: 10px margin 10px;
+.card{
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.modoOscuro{
+background-color:#121212;
+color:white;
 }
